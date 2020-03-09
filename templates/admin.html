@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>a d m i n s y s t e m</h1>
+
+<div class="center" style="width:10%">
+    <div>
+      <a href="{{url_for('update_inventory')}}"><button class="button button2">View Inventory</button></a>
+    </div> 
+    <div>
+      <a href="{{url_for('order_list')}}"><button class="button button2">View Current Orders</button></a>
+    </div>
+</div>
+
+{% endblock %}

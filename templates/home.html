@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div>
+    <h1>g o u r m e t V A P O R W A V E</h1><br/>
+    <img  class="center" src="https://cdn150.picsart.com/upscale-272886777011211.png?r1024x1024" style="width: 250px;height:250px;">
+    <p>welcome, what would you like to do today?</p>
+    <div class="center" style="width:10%">
+        <form method="POST">
+            <input class="button button2" type="submit" name="create_order" value="Create New Order"/><br>       
+        </form>
+        <div>
+            <a style="text-align:center" href="{{url_for('order_status')}}"><button class="button button2">Track Status of Order</button></a>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

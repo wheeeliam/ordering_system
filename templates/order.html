@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>Create New Order</h1>
+
+<form method="POST">
+    <input class="button button1" type="submit" name="add_main" value="Add main to order"/><br>
+    <input class="button button1" type="submit" name="add_side" value="Add side to order"/><br>
+    <input class="button button2" type="submit" name="checkout" value="Go to checkout"/><br>
+</form>
+
+{{order}}
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block body %}
+<div>
+    <h1>ORDERS</h1>
+</div>
+<br />
+<div>
+    {% if errors %}
+        {% for error in errors %}
+            <h2>{{ error }}</h2>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div>
+    <table id="inventory">
+        <col width="80">
+        <col width="130">
+        <col width="80">
+        <col width="170">
+        <col width="170">
+        <col width="170">
+    <tr>
+        <th>Order ID</th>
+        <th>Order Status</th>
+        <th>Total Price</th>
+        <th>Items in Order</th>
+        <th>Update Order Status</th>
+        <th>Delete Order</th>
+    </tr>
+        {% for order in orders %}
+     <tr>
+        <td>{{ order._order_id }}</td>
+         <td>{{ order._order_status }}</td>
+         <td>${{ order._total_price }}</td>
+         <td>
+            {% for item in order.itemlist %}
+                {{item}}
+            {% endfor %}
+         </td>
+         <td>
+            <form method="post">
+                <input hidden name="id" value="{{ order._order_id }}">
+                <input hidden name="action" value="update">
+                <select style="height: 30px" name='order_status'>
+                    <option value='Kitchen received'>Kitchen Received</option>
+                    <option value='Ready for Pickup'>Ready For Pickup</option>
+                </select>
+                 <button class="button button2" type='submit'>Update Status</button>
+            </form>
+         </td>
+         <td>
+            <form method="post">
+                <input hidden name="id" value="{{ order._order_id }}">
+                <input hidden name="action" value="delete">
+                <button class="button button1">Delete from Orders</button>
+            </form>
+        </td>
+    </tr>
+        {% endfor %}
+    <br>
+    </table>
+</div>
+
+{% endblock %}

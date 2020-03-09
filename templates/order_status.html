@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>Check Order Status</h1>
+
+<form method="POST">
+    <label>Order ID: </label>
+    <input name='order_id' {% if form %} value = {{form.order_id}} {% endif %}/>
+    <button type='submit'>Fetch Status</button>
+</form>
+
+{% if form %}
+    {% for error in form.errors %}
+        <div><font size="3" color="red">{{error}}</font></div>    
+    {% endfor %}
+{% endif %}
+
+{{status}}
+
+{% endblock %}

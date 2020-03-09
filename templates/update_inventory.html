@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div>
+    <h1>INVENTORY</h1>
+</div>
+<br />
+
+{% if errors %}
+    {% for error in errors %}
+        <h2>{{ error }}</h2>
+    {% endfor %}
+{% endif %}
+
+<div>
+    <table id="inventory">
+        <col width="130">
+        <col width="130">
+        <col width="170">
+        <tr>
+            <th>Ingredient</th>
+            <th>Current Quantity</th>
+            <th>Update Quantity</th>
+        </tr>
+        {% for i in inventory %}
+        <tr>
+            <td>{{ i }}</td>
+            <td>{{ inventory[i] }}</td>
+            <td>
+                <form method="POST">
+                    <input type="number" name="qty" required>
+                    <input hidden name="item" value="{{i}}">
+                    <input hidden name="action" value="update">
+                    <button class="button button2">Update</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        <br>
+    </table>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>Selection of Main</h1>
+
+<form method="POST">
+    <div class="menu">
+        Choose the number of buns and patties you would like in your Base Gourmet C R E A T I O N<br>
+        - Single Burger: 2 buns, 1 patty<br>
+        - Double Burger: 3 buns, 2 patties<br>
+        - Triple Burger: 4 buns, 3 patties<br>
+        - Wrap: 1 wrap, 1 patty<br>
+        <br>
+
+        Our base creations only come with sesame buns, wholegrain wraps and beef patties.<br><br>
+        If you would like other types of buns, wraps, patties, or would like to add other ingredients,<br>
+        Please select "Yes" when prompted "Do you wish to customise?"<br><br>
+
+        
+        Choosing more buns/patties/wraps will override the default ingredients used in base mains, they will<br>
+        not increase the amount of them in your order.<br>
+        If you select multiple buns/wraps/patties, the bottom most one will be the that counts.<br><br>
+
+    </div>
+
+
+    <label class="menu">Choice of Main:</label><br/>
+    <br>
+    <select style="height:30px;" name='menu_item'>
+        <option disabled value=item>--Choose a Main--</option>
+        {% for item in menu_list %}
+            <option value="{{item}}" {% if selected_menu_item == item %} selected {% endif %}>{{item}}</option>
+        {% endfor %}
+    </select>
+
+    <br>
+    <br>
+
+    <label class="menu">Do you wish to customise?</label><br/>
+    <br>
+    <select style="height:35px;" name='custom'>
+        <option value='no' {% if selected_custom == 'no' %} selected {% endif %}>No</option>
+        <option value='yes' {% if selected_custom == 'yes' %} selected {% endif %}>Yes</option>
+    </select>
+
+    <input class="button button2" type="submit" name="select" value="Select">
+
+    <!-- If user does not wish to customise their item -->
+    {% if selected_custom == 'no' %}
+        <br>
+        <br>
+
+        <input class="button button2" type="submit" name="check" value="Check Price">
+
+        <br>
+        <br>
+
+        {% if price %}
+            <label class="menu">The price of your main is ${{price}}</label>
+        {% endif %}
+
+    <!-- If user does wish to customise their item -->
+    {% elif selected_custom == 'yes' %}
+        <br>
+        <br>
+
+        {% for x in range(10) %}
+            <label class="menu">Extra Ingredient {{x}}:</label>
+            <select style="height:30px" name="{{x}}">
+                <option disabled value=item>--Choose an Ingredient--</option>
+                <option value="None">None</option>
+                {% for ing in ingrs %}
+                    <option value="{{ing}}" {% if custom_all and custom_all[x] == ing %} selected {% endif %}>{{ing}}</option>
+                {% endfor %}
+            </select><br/>
+        {% endfor %}
+
+
+        <input class="button button2" type="submit" name="check" value="Check Price">
+
+        <br>
+        <br>
+
+        {% if price %}
+            <label>Price of main is {{price}}</label>
+        {% endif %}
+
+    {% endif %}
+
+    <br>
+    <br>
+
+    {% if price %}
+        <input class="button button2" type="submit" name="confirm" value="Confirm Main">
+    {% endif %}
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>Selection of Sides</h1>
+
+<form method="POST">
+    <div class="menu">
+        Choose what side you would like in your Gourmet Order:<br>
+        We offer nuggets, fries and drinks<br><br>
+    </div>
+
+    <label class="menu">Choice of Side:</label><br>
+    <br>
+    <select style="height:30px"name="side_item">
+        <option disabled value=item>--Choose a Side--</option>
+        {% for item in sides %}
+            <option value="{{item}}" {% if selected_side_item == item %} Selected {% endif %}>{{item}}</option>
+        {% endfor %}
+    </select>
+
+    <br>
+    <br>
+
+    <input class="button button1" type="submit" name="check" value="Check Price">
+
+    <br>
+    <br>
+
+    {% if price %}
+        <label class="menu">The price of this side is ${{price}}</label>
+        <br>
+        <br>
+        <input class="button button1" type="submit" name="confirm" value="Confirm Side">
+    {% endif %}
+
+</form>
+
+{% endblock %}
